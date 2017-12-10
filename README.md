@@ -3,10 +3,10 @@ A tool to help with social network statistic tracking!
 
 This program can be used to grab social media statistics from many networks such as:
 
-* Instagram
-* Facebook
-* Twitter
-* Youtube
+* [Instagram](https://www.instagram.com/)
+* [Facebook](https://www.facebook.com/)
+* [Twitter](https://www.twitter.com/)
+* [Youtube](https://www.youtube.com/)
 
 Since SocialStats is written in Python, it's cross-platform.
 
