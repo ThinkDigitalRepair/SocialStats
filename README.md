@@ -13,6 +13,9 @@ Since SocialStats is written in Python, it's cross-platform.
 Currently, we're working on publicly available stats with an option to sign in in the roadmap. Feel free to add suggestions!
 Also, a GUI is in the works, hopefully written in Qt. 
 
+###Roadmap
+
+* Support Multiple accounts in args
 ## Usage
 
 help: `instagram -h` 
