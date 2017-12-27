@@ -1,32 +1,54 @@
 import argparse
-import re
 
+import regex
 import requests
 from bs4 import BeautifulSoup
 
-parser = argparse.ArgumentParser(description="A tool to assist in social media statistic tracking.")
-parser.add_argument("username")
-args = parser.parse_args()
 
-username = args.username
+class Obj:
 
+    def __init__(self, url):
+        """
+        Doesn't set username until after url is sent to init.
 
-def get_page(base_url):
-    url_string = base_url + username
+        :param url: base_url. Adds username to url after.
+        """
 
-    page = requests.get(base_url + username)
+        parser = argparse.ArgumentParser(description="A tool to assist in social media statistic tracking.")
+        parser.add_argument("username")
+        parser.add_argument("--searchrank")
+        self.args = parser.parse_args()
 
-    if not page.ok:
-        page.raise_for_status()
-        print("There was no active profile found at {0}. Please check the spelling and try again".format(url_string))
-        exit(1)
+        self.username = self.args.username
+        self.page = self.get_page(url)
+        self.soup = self.get_soup()
 
-    return page
+    def get_page(self, base_url):
+        """
 
+        :type base_url: string
+        """
+        url_string = base_url + self.username
 
-def get_soup(page):
-    return BeautifulSoup(page.text, "html.parser")
+        page = requests.get(base_url + self.username)
 
+        if not page.ok:
+            page.raise_for_status()
+            print(
+                "There was no active profile found at {0}. Please check the spelling and try again".format(url_string))
+            exit(1)
 
-def extract_digits(string):
-    return re.findall("(\d+,*\d+)", string)[0]
+        return page
+
+    def get_soup(self):
+        return BeautifulSoup(self.page.text, "html.parser")
+
+    @staticmethod
+    def extract_digits(string):
+        return int(regex.findall("(\d+,*\d+)", string)[0].replace(',', ''))
+
+    def find_text(self, query):
+        return regex.findall(query, self.page.text)
+
+    def parseargs(self):
+        return
